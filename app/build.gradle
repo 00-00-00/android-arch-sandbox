@@ -25,7 +25,7 @@ android {
   productFlavors {
     dev {
       buildConfigField 'String', 'HOST', '"http://192.168.0.6:3000/api/"'
-      buildConfigField 'String', 'API_VERSION', "v1"
+      buildConfigField 'String', 'API_VERSION', '"v1"'
     }
   }
 
