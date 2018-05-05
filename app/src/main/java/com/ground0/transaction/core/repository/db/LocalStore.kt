@@ -3,17 +3,13 @@ package com.ground0.transaction.core.repository.db
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Room
 import android.content.Context
-import com.ground0.model.Customer
-import com.ground0.model.Retailer
 import com.ground0.model.RetailTransaction
-import com.ground0.transaction.core.repository.Repository
-import io.reactivex.Observable
 
 /**
  * Created by 00-00-00 on 05/05/18.
  */
 
-object LocalStore : Repository {
+object LocalStore {
 
   private lateinit var databaseImp: RoomDatabase
 
@@ -22,53 +18,23 @@ object LocalStore : Repository {
         .build()
   }
 
-  override fun getTransactions(): LiveData<List<RetailTransaction>> {
-    return databaseImp.transactionDao().getTransactions()
+  fun readTransactions(): LiveData<List<RetailTransaction>> {
+    return databaseImp.transactionDao()
+        .getTransactions()
   }
 
-  override fun getTransaction(id: Long): LiveData<RetailTransaction> {
-    return databaseImp.transactionDao().getTransaction(id)
+  fun readTransaction(id: Long): LiveData<RetailTransaction> {
+    return databaseImp.transactionDao()
+        .getTransaction(id)
   }
 
-  override fun postTransaction(retailTransaction: RetailTransaction): Observable<Void> {
-    TODO(
-        "not implemented"
-    ) //To change body of created functions use File | Settings | File Templates.
+  fun writeTransactions(retailTransactions: List<RetailTransaction>) {
+    return databaseImp.transactionDao()
+        .insert(retailTransactions)
   }
 
-  override fun getCustomers(): Observable<List<Customer>> {
-    TODO(
-        "not implemented"
-    ) //To change body of created functions use File | Settings | File Templates.
-  }
-
-  override fun getCustomer(id: Long): Observable<Customer> {
-    TODO(
-        "not implemented"
-    ) //To change body of created functions use File | Settings | File Templates.
-  }
-
-  override fun postTransaction(customer: Customer): Observable<Void> {
-    TODO(
-        "not implemented"
-    ) //To change body of created functions use File | Settings | File Templates.
-  }
-
-  override fun getRetailers(): Observable<List<Retailer>> {
-    TODO(
-        "not implemented"
-    ) //To change body of created functions use File | Settings | File Templates.
-  }
-
-  override fun getRetailer(id: Long): Observable<Retailer> {
-    TODO(
-        "not implemented"
-    ) //To change body of created functions use File | Settings | File Templates.
-  }
-
-  override fun postRetailer(retailer: Retailer): Observable<Void> {
-    TODO(
-        "not implemented"
-    ) //To change body of created functions use File | Settings | File Templates.
+  fun writeTransaction(retailTransaction: RetailTransaction) {
+    return databaseImp.transactionDao()
+        .insert(retailTransaction)
   }
 }

@@ -17,6 +17,9 @@ interface RetailTransactionDao {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   fun insert(retailTransaction: RetailTransaction)
 
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  fun insert(retailTransactions: List<RetailTransaction>)
+
   @Query("SELECT * FROM retail_transactions WHERE id = :id LIMIT 1")
   fun getTransaction(id: Long): LiveData<RetailTransaction>
 
