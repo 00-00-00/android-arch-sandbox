@@ -7,7 +7,7 @@ import java.util.Date
  * Created by 00-00-00 on 04/05/18.
  */
 
-class Customer {
+open class Customer {
   @SerializedName("id")
   var id: Int? = null
 

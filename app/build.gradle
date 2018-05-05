@@ -19,6 +19,16 @@ android {
     versionName "1.0"
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
+
+  flavorDimensions 'env'
+
+  productFlavors {
+    dev {
+      buildConfigField 'String', 'HOST', '"http://192.168.0.6:3000/api/"'
+      buildConfigField 'String', 'API_VERSION', '"v1"'
+    }
+  }
+
   buildTypes {
     release {
       minifyEnabled false
@@ -29,7 +39,9 @@ android {
 
 dependencies {
   implementation fileTree(include: ['*.jar'], dir: 'libs')
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+  implementation project(':model')
 
   def support_library_version = '27.1.1'
   implementation "com.android.support:appcompat-v7:$support_library_version"
@@ -62,10 +74,22 @@ dependencies {
   kapt "com.jakewharton:butterknife-compiler:$butterknife_version"
 
   //Retrofit
-  implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-  
+  def retrofit_version = '2.4.0'
+  implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+  implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+  implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+
+  //RxJava
+  implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+  implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+
+  //For JodaTime
+  implementation 'com.jakewharton.threetenabp:threetenabp:1.1.0'
+
+  //Gson
+  compile 'com.google.code.gson:gson:2.8.3'
+
   testImplementation 'junit:junit:4.12'
   androidTestImplementation 'com.android.support.test:runner:1.0.2'
   androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-  project(':model')
 }
