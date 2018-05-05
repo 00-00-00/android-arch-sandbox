@@ -4,17 +4,17 @@ import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import java.util.Date
+import org.threeten.bp.LocalDateTime
 
-@Entity
-class Transaction {
+@Entity(tableName = "retail_transactions")
+class RetailTransaction {
 
   @PrimaryKey
   var id: Long? = null
 
   @ColumnInfo(name = "amount")
   @SerializedName("amount_cents")
-  val amount: Long? = null
+  var amount: Long? = null
 
   @ColumnInfo(name = "currency")
   @SerializedName("amount_currency")
@@ -22,17 +22,17 @@ class Transaction {
 
   @ColumnInfo(name = "created_at")
   @SerializedName("created_at")
-  lateinit var createdAt: Date
+  lateinit var createdAt: LocalDateTime
 
   @ColumnInfo(name = "updated_at")
   @SerializedName("updated_at")
-  lateinit var updatedAt: Date
+  lateinit var updatedAt: LocalDateTime
 
   @ColumnInfo(name = "customer_id")
   @SerializedName("customer_id")
-  val customerId: Long? = null
+  var customerId: Long? = null
 
   @ColumnInfo(name = "retailer_id")
   @SerializedName("retailer_id")
-  val retailerId: Long? = null
+  var retailerId: Long? = null
 }

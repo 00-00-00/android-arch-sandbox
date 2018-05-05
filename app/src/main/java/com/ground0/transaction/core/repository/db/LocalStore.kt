@@ -1,11 +1,12 @@
-package com.ground0.transaction.core.repository
+package com.ground0.transaction.core.repository.db
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Room
 import android.content.Context
 import com.ground0.model.Customer
 import com.ground0.model.Retailer
-import com.ground0.model.Transaction
+import com.ground0.model.RetailTransaction
+import com.ground0.transaction.core.repository.Repository
 import io.reactivex.Observable
 
 /**
@@ -21,15 +22,15 @@ object LocalStore : Repository {
         .build()
   }
 
-  override fun getTransactions(): LiveData<List<Transaction>> {
+  override fun getTransactions(): LiveData<List<RetailTransaction>> {
     return databaseImp.transactionDao().getTransactions()
   }
 
-  override fun getTransaction(id: Long): LiveData<Transaction> {
+  override fun getTransaction(id: Long): LiveData<RetailTransaction> {
     return databaseImp.transactionDao().getTransaction(id)
   }
 
-  override fun postTransaction(transaction: Transaction): Observable<Void> {
+  override fun postTransaction(retailTransaction: RetailTransaction): Observable<Void> {
     TODO(
         "not implemented"
     ) //To change body of created functions use File | Settings | File Templates.
