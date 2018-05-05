@@ -1,41 +1,33 @@
 package com.ground0.transaction.core.repository
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
+import android.arch.persistence.room.Room
+import android.content.Context
 import com.ground0.model.Customer
 import com.ground0.model.Retailer
 import com.ground0.model.Transaction
-import com.ground0.transaction.BuildConfig
 import io.reactivex.Observable
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * Created by 00-00-00 on 05/05/18.
  */
 
-object CloudStore : Repository {
+object LocalStore : Repository {
 
-  private val HOST = "${BuildConfig.HOST}${BuildConfig.API_VERSION}/"
-  private lateinit var restImp: ApiStore
+  private lateinit var databaseImp: RoomDatabase
 
-  fun init() {
-    val retrofit = Retrofit.Builder()
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(HOST)
+  fun init(context: Context) {
+    databaseImp = Room.databaseBuilder(context, RoomDatabase::class.java, "transaction_db")
         .build()
-
-    restImp = retrofit.create(ApiStore::class.java)
   }
 
-  override fun getTransactions(): LiveData<List<Transaction>> =
-    getLiveData(restImp.getTransactions())
+  override fun getTransactions(): LiveData<List<Transaction>> {
+    return databaseImp.transactionDao().getTransactions()
+  }
 
-  override fun getTransaction(id: Long): LiveData<Transaction> =
-    getLiveData(restImp.getTransaction(id))
-
+  override fun getTransaction(id: Long): LiveData<Transaction> {
+    return databaseImp.transactionDao().getTransaction(id)
+  }
 
   override fun postTransaction(transaction: Transaction): Observable<Void> {
     TODO(
@@ -77,11 +69,5 @@ object CloudStore : Repository {
     TODO(
         "not implemented"
     ) //To change body of created functions use File | Settings | File Templates.
-  }
-
-  private fun <T> getLiveData(observable: Observable<T>): MutableLiveData<T> {
-    val mutableLiveData = MutableLiveData<T>()
-    observable.subscribe({ mutableLiveData.postValue(it) })
-    return mutableLiveData
   }
 }

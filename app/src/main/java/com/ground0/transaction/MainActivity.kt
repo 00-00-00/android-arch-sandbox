@@ -1,11 +1,11 @@
 package com.ground0.transaction
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
+import com.ground0.model.Transaction
 import com.ground0.transaction.core.repository.CloudStore
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,13 +15,14 @@ class MainActivity : AppCompatActivity() {
 
     CloudStore.init()
     CloudStore.getTransactions()
-        .subscribeOn(Schedulers.newThread())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe({ transactions ->
-          findViewById<TextView>(R.id.a_main_text).apply {
-            text = transactions.map { it.amount }
-                .joinToString()
-          }
-        })
+        .observe(this,
+            Observer<List<Transaction>> {
+
+              findViewById<TextView>(R.id.a_main_text).apply {
+                text = it?.map { it.amount }
+                    ?.joinToString()
+              }
+
+            })
   }
 }

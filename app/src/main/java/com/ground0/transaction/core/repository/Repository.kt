@@ -1,5 +1,6 @@
 package com.ground0.transaction.core.repository
 
+import android.arch.lifecycle.LiveData
 import com.ground0.model.Customer
 import com.ground0.model.Retailer
 import com.ground0.model.Transaction
@@ -11,8 +12,8 @@ import io.reactivex.Observable
 
 interface Repository {
 
-  fun getTransactions(): Observable<List<Transaction>>
-  fun getTransaction(id: Long): Observable<Transaction>
+  fun getTransactions(): LiveData<List<Transaction>>
+  fun getTransaction(id: Long): LiveData<Transaction>
   fun postTransaction(transaction: Transaction): Observable<Void>
 
   fun getCustomers(): Observable<List<Customer>>
