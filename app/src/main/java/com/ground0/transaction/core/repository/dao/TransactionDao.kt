@@ -18,7 +18,7 @@ interface TransactionDao {
   fun insert(transaction: Transaction)
 
   @Query("SELECT * FROM transaction WHERE id = :id LIMIT 1")
-  fun getTransaction(id: Int): LiveData<Transaction>
+  fun getTransaction(id: Long): LiveData<Transaction>
 
   @Query("SELECT * FROM transaction")
   fun getTransactions(): LiveData<List<Transaction>>
