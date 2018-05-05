@@ -24,7 +24,7 @@ android {
 
   productFlavors {
     dev {
-      buildConfigField 'String', 'HOST', '"http://192.168.0.6:3000/api/"'
+      buildConfigField 'String', 'HOST', '"http://192.168.0.2:3000/api/"'
       buildConfigField 'String', 'API_VERSION', '"v1"'
     }
   }
@@ -87,7 +87,7 @@ dependencies {
   implementation 'com.jakewharton.threetenabp:threetenabp:1.1.0'
 
   //Gson
-  compile 'com.google.code.gson:gson:2.8.3'
+  implementation 'com.google.code.gson:gson:2.8.3'
 
   testImplementation 'junit:junit:4.12'
   androidTestImplementation 'com.android.support.test:runner:1.0.2'
