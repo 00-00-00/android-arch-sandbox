@@ -1,6 +1,5 @@
 package com.ground0.transaction.core.repository.network
 
-import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import com.google.gson.GsonBuilder
 import com.ground0.model.RetailTransaction
@@ -41,15 +40,11 @@ object CloudStore {
     )
   }
 
-  fun getTransactions(): LiveData<List<RetailTransaction>> =
-    getLiveData(
-        restImp.getTransactions()
-    )
+  fun getTransactions(): Observable<List<RetailTransaction>> =
+    restImp.getTransactions()
 
-  fun getTransaction(id: Long): LiveData<RetailTransaction> =
-    getLiveData(
-        restImp.getTransaction(id)
-    )
+  fun getTransaction(id: Long): Observable<RetailTransaction> =
+    restImp.getTransaction(id)
 
   private fun <T> getLiveData(observable: Observable<T>): MutableLiveData<T> {
     val mutableLiveData = MutableLiveData<T>()

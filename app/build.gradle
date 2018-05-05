@@ -58,6 +58,7 @@ dependencies {
   def room_version = '1.0.0'
   implementation "android.arch.persistence.room:runtime:$room_version"
   kapt "android.arch.persistence.room:compiler:$room_version"
+  implementation "android.arch.persistence.room:rxjava2:$room_version"
 
   //Paging
   implementation "android.arch.paging:runtime:1.0.0-rc1"
