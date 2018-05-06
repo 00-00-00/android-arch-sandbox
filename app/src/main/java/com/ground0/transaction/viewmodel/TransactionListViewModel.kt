@@ -2,6 +2,7 @@ package com.ground0.transaction.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.util.Log
 import com.ground0.model.RetailTransaction
 import com.ground0.transaction.core.livedata.SingleLiveEvent
 import com.ground0.transaction.core.repository.network.CloudStore
@@ -14,20 +15,22 @@ import io.reactivex.schedulers.Schedulers
 
 class TransactionListViewModel : ViewModel() {
 
-  var transactions: MutableLiveData<List<RetailTransaction>> =
-    MutableLiveData()
-    get() {
-      loadTransactions()
-      return field
-    }
-
+  val transactions: MutableLiveData<List<RetailTransaction>> by lazy {
+    loadTransactions()
+    MutableLiveData<List<RetailTransaction>>()
+  }
   val snackBarEvent = SingleLiveEvent<String>()
 
   private fun loadTransactions() {
+    Log.d(this::class.java.name, "Loading transactions: ${System.currentTimeMillis()}")
     CloudStore.getTransactions()
-        .subscribeOn(Schedulers.newThread())
+        .subscribeOn(Schedulers.computation())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({ it ->
+          Log.d(
+              this@TransactionListViewModel.javaClass.canonicalName,
+              "Rx observable triggered ${System.currentTimeMillis()}"
+          )
           transactions.value = it
           snackBarEvent.value = "Yo, Shits done ${System.currentTimeMillis()}"
         }, {
