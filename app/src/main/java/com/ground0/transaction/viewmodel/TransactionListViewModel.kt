@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel
 import android.util.Log
 import com.ground0.model.RetailTransaction
 import com.ground0.transaction.core.livedata.SingleLiveEvent
+import com.ground0.transaction.core.repository.db.LocalStore
 import com.ground0.transaction.core.repository.network.CloudStore
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -31,6 +32,12 @@ class TransactionListViewModel : ViewModel() {
               this@TransactionListViewModel.javaClass.canonicalName,
               "Rx observable triggered ${System.currentTimeMillis()}"
           )
+          LocalStore.writeTransactions(it)
+              .observeOn(AndroidSchedulers.mainThread())
+              .subscribe(
+                  { snackBarEvent.value = "Saved to db" },
+                  { snackBarEvent.value = "Failed to save to db" }
+              )
           transactions.value = it
           snackBarEvent.value = "Yo, Shits done ${System.currentTimeMillis()}"
         }, {

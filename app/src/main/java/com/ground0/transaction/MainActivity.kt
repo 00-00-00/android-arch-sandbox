@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
             text = it?.map { it.amount }
                 ?.joinToString()
           }
-          it?.let { Thread(Runnable { LocalStore.writeTransactions(it) }).start() }
         })
   }
 
