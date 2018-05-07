@@ -1,7 +1,9 @@
 package com.ground0.transaction.core.repository.network
 
 import com.ground0.model.RetailTransaction
+import io.reactivex.Flowable
 import io.reactivex.Observable
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -12,9 +14,9 @@ import retrofit2.http.Query
 interface ApiStore {
 
   @GET("transactions")
-  fun getTransactions(): Observable<List<RetailTransaction>>
+  fun getTransactions(): Flowable<List<RetailTransaction>>
 
   @GET("transaction/{transactionId}")
-  fun getTransaction(@Query("transactionId") id: Long): Observable<RetailTransaction>
+  fun getTransaction(@Query("transactionId") id: Long): Flowable<RetailTransaction>
 
 }

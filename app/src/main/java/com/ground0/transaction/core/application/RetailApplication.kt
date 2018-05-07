@@ -1,6 +1,8 @@
 package com.ground0.transaction.core.application
 
 import android.app.Application
+import com.ground0.transaction.core.repository.db.LocalStore
+import com.ground0.transaction.core.repository.network.CloudStore
 import com.jakewharton.threetenabp.AndroidThreeTen
 
 /**
@@ -12,5 +14,7 @@ class RetailApplication: Application() {
   override fun onCreate() {
     super.onCreate()
     AndroidThreeTen.init(this)
+    CloudStore.init()
+    LocalStore.init(this)
   }
 }

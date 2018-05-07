@@ -6,6 +6,7 @@ import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import com.ground0.model.RetailTransaction
+import io.reactivex.Flowable
 
 /**
  * Created by 00-00-00 on 05/05/18.
@@ -21,9 +22,9 @@ interface RetailTransactionDao {
   fun insert(retailTransactions: List<RetailTransaction>)
 
   @Query("SELECT * FROM retail_transactions WHERE id = :id LIMIT 1")
-  fun getTransaction(id: Long): LiveData<RetailTransaction>
+  fun getTransaction(id: Long): Flowable<RetailTransaction>
 
   @Query("SELECT * FROM retail_transactions")
-  fun getTransactions(): LiveData<List<RetailTransaction>>
+  fun getTransactions(): Flowable<List<RetailTransaction>>
 
 }
