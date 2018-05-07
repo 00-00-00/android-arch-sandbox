@@ -25,7 +25,7 @@ class TransactionListViewModel : ViewModel() {
   private fun loadTransactions() {
     Log.d(this::class.java.name, "Loading transactions: ${System.currentTimeMillis()}")
     CloudStore.getTransactions()
-        .subscribeOn(Schedulers.computation())
+        .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({ it ->
           Log.d(
@@ -43,5 +43,12 @@ class TransactionListViewModel : ViewModel() {
         }, {
           snackBarEvent.value = "Oh oh, dum dum ${it.message}"
         })
+  }
+
+  fun runFailApi() {
+    CloudStore.getNon()
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe({ snackBarEvent.value = "FAILED" }, { snackBarEvent.value = it.message })
   }
 }

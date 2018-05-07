@@ -14,7 +14,10 @@ import retrofit2.http.Query
 interface ApiStore {
 
   @GET("transactions")
-  fun getTransactions(): Flowable<List<RetailTransaction>>
+  fun getTransactions(): Observable<Response<List<RetailTransaction>>>
+
+  @GET("non_existant")
+  fun getNon(): Observable<Response<Unit>>
 
   @GET("transaction/{transactionId}")
   fun getTransaction(@Query("transactionId") id: Long): Flowable<RetailTransaction>
