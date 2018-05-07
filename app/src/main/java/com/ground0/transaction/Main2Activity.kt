@@ -6,7 +6,6 @@ import android.widget.TextView
 import android.widget.Toast
 import com.ground0.transaction.core.repository.db.LocalStore
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main2.toolbar
 
 class Main2Activity : AppCompatActivity() {
@@ -17,8 +16,7 @@ class Main2Activity : AppCompatActivity() {
     setSupportActionBar(toolbar)
 
 
-    LocalStore.readTransactions()
-        .subscribeOn(Schedulers.newThread())
+    LocalStore.getTransactions()
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
           findViewById<TextView>(R.id.a_main2_text).apply {

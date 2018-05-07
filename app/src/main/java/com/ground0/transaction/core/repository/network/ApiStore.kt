@@ -20,6 +20,6 @@ interface ApiStore {
   fun getNon(): Observable<Response<Unit>>
 
   @GET("transaction/{transactionId}")
-  fun getTransaction(@Query("transactionId") id: Long): Flowable<RetailTransaction>
+  fun getTransaction(@Query("transactionId") id: Long): Observable<Response<RetailTransaction>>
 
 }
