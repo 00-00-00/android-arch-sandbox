@@ -8,7 +8,7 @@ import retrofit2.Response
  * Created by 00-00-00 on 07/05/18.
  */
 
-class HttpObserverOperator<T>: Function< Response<T>, SingleSource<T>> {
+class HttpStatusOperator<T>: Function< Response<T>, SingleSource<T>> {
   override fun apply(t: Response<T>): SingleSource<T> {
     return SingleSource { observer ->
       if (t.isSuccessful) {

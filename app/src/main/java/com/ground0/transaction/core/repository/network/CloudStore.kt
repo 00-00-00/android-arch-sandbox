@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder
 import com.ground0.model.RetailTransaction
 import com.ground0.transaction.BuildConfig
 import com.ground0.transaction.core.repository.db.util.LocalDateTimeConverter
-import com.ground0.transaction.core.repository.network.util.HttpObserverOperator
+import com.ground0.transaction.core.repository.network.util.HttpStatusOperator
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -62,6 +62,6 @@ object CloudStore {
   }
 
   private fun <T> Observable<Response<T>>.adapt(): Observable<T> =
-    switchMapSingle(HttpObserverOperator()).subscribeOn(Schedulers.io())
+    switchMapSingle(HttpStatusOperator()).subscribeOn(Schedulers.io())
 
 }
