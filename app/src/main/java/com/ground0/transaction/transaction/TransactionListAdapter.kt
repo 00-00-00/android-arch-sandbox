@@ -15,6 +15,7 @@ import com.ground0.transaction.transaction.TransactionListAdapter.ViewHolder
 
 class TransactionListAdapter(var list: List<RetailTransaction>) : RecyclerView.Adapter<ViewHolder>() {
 
+  val transactionListItemViewModelFactory = TransactionListItemViewModelFactory()
   override fun onCreateViewHolder(
     parent: ViewGroup,
     viewType: Int
@@ -31,7 +32,7 @@ class TransactionListAdapter(var list: List<RetailTransaction>) : RecyclerView.A
     position: Int
   ) {
     ItemTransactionBinding.bind(holder.itemView)
-        .retailTransaction = list[position]
+        .itemViewModel = transactionListItemViewModelFactory.createItemViewModel(list[position])
   }
 
   inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

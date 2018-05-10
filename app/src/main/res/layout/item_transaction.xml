@@ -2,8 +2,8 @@
 <layout>
   <data>
     <variable
-        name="retailTransaction"
-        type="com.ground0.model.RetailTransaction"
+        name="itemViewModel"
+        type="com.ground0.transaction.transaction.TransactionListItemViewModelFactory.TransactionListItemViewModel"
         />
   </data>
   <android.support.constraint.ConstraintLayout
@@ -35,7 +35,7 @@
             android:id="@+id/i_transaction_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{retailTransaction.amount.toString()}'
+            android:text='@{itemViewModel.retailTransaction.amount.toString()}'
             />
         <Space
             android:layout_width="0dp"
@@ -46,7 +46,7 @@
             android:id="@+id/i_transaction_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{retailTransaction.id.toString()}'
+            android:text='@{itemViewModel.retailTransaction.id.toString()}'
             />
       </LinearLayout>
 
