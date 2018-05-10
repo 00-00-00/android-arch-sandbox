@@ -52,9 +52,4 @@ class MainActivity : AppCompatActivity() {
   fun onButtonClick() {
     startActivity(Intent(this, Main2Activity::class.java))
   }
-
-  @OnClick(R.id.a_main_button2)
-  fun onFailApiClick() {
-    viewModel.runFailApi()
-  }
 }
