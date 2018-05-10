@@ -4,7 +4,7 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import com.ground0.model.RetailTransaction
-import com.ground0.transaction.core.repository.retailtransaction.RetailTransactionDao
+import com.ground0.transaction.core.repository.db.dao.RetailTransactionDao
 import com.ground0.transaction.core.repository.db.util.DateTypeConverter
 
 /**

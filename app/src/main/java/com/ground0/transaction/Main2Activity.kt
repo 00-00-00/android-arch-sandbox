@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
 import android.widget.Toast
-import com.ground0.transaction.core.repository.retailtransaction.RetailTransactionLocalStore
+import com.ground0.transaction.core.repository.db.LocalStore
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_main2.toolbar
 
@@ -16,7 +16,7 @@ class Main2Activity : AppCompatActivity() {
     setSupportActionBar(toolbar)
 
 
-    RetailTransactionLocalStore.get()
+    LocalStore.getTransactions()
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
           findViewById<TextView>(R.id.a_main2_text).apply {

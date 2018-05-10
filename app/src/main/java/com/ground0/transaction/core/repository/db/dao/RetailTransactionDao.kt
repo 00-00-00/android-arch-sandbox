@@ -1,4 +1,4 @@
-package com.ground0.transaction.core.repository.retailtransaction
+package com.ground0.transaction.core.repository.db.dao
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao

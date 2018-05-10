@@ -5,8 +5,10 @@ import android.arch.lifecycle.ViewModel
 import android.util.Log
 import com.ground0.model.RetailTransaction
 import com.ground0.transaction.core.livedata.SingleLiveEvent
-import com.ground0.transaction.core.repository.retailtransaction.RetailTransactionRepositoryImp
+import com.ground0.transaction.core.repository.RepositoryImp
+import com.ground0.transaction.core.repository.network.CloudStore
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 /**
  * Created by 00-00-00 on 05/05/18.
@@ -22,7 +24,7 @@ class TransactionListViewModel : ViewModel() {
 
   private fun loadTransactions() {
     Log.d(this::class.java.name, "Loading transactions: ${System.currentTimeMillis()}")
-    RetailTransactionRepositoryImp.get()
+    RepositoryImp.getTransactions()
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({ it ->
           Log.d(
@@ -34,5 +36,12 @@ class TransactionListViewModel : ViewModel() {
         }, {
           snackBarEvent.value = "Oh oh, dum dum ${it.message}"
         })
+  }
+
+  fun runFailApi() {
+    CloudStore.getNon()
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe({ snackBarEvent.value = "FAILED" }, { snackBarEvent.value = it.message })
   }
 }
