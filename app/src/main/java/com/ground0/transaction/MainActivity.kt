@@ -10,7 +10,6 @@ import android.widget.TextView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import com.ground0.transaction.R.id
-import com.ground0.transaction.core.repository.db.LocalStore
 import com.ground0.transaction.viewmodel.TransactionListViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -36,7 +35,6 @@ class MainActivity : AppCompatActivity() {
             text = it?.map { it.amount }
                 ?.joinToString()
           }
-          it?.let { Thread(Runnable { LocalStore.writeTransactions(it) }).start() }
         })
   }
 
@@ -55,5 +53,10 @@ class MainActivity : AppCompatActivity() {
   @OnClick(R.id.a_main_button)
   fun onButtonClick() {
     startActivity(Intent(this, Main2Activity::class.java))
+  }
+
+  @OnClick(R.id.a_main_button2)
+  fun onFailApiClick() {
+    viewModel.runFailApi()
   }
 }

@@ -24,7 +24,7 @@ android {
 
   productFlavors {
     dev {
-      buildConfigField 'String', 'HOST', '"http://192.168.0.2:3000/api/"'
+      buildConfigField 'String', 'HOST', '"http://192.168.0.5:3000/api/"'
       buildConfigField 'String', 'API_VERSION', '"v1"'
     }
   }
@@ -93,4 +93,5 @@ dependencies {
   testImplementation 'junit:junit:4.12'
   androidTestImplementation 'com.android.support.test:runner:1.0.2'
   androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+  testImplementation 'org.mockito:mockito-core:2.8.9'
 }
