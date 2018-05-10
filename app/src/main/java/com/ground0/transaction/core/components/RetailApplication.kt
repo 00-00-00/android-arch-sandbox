@@ -1,4 +1,4 @@
-package com.ground0.transaction.core.application
+package com.ground0.transaction.core.components
 
 import android.app.Application
 import com.ground0.transaction.core.repository.db.LocalStore
