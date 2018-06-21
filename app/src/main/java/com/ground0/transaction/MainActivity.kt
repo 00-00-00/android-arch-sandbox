@@ -10,7 +10,7 @@ import android.widget.TextView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import com.ground0.transaction.R.id
-import com.ground0.transaction.viewmodel.TransactionListViewModel
+import com.ground0.transaction.transaction.TransactionListViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,12 +39,10 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun subscribeToMessages() {
-    viewModel.snackBarEvent.observe(
+    viewModel.errorEvent.observe(
         this, Observer {
       it?.let {
-        Snackbar.make(
-            findViewById(R.id.a_main_container), it, Snackbar.LENGTH_SHORT
-        )
+        Snackbar.make(findViewById(R.id.a_main_container), it, Snackbar.LENGTH_SHORT)
             .show()
       }
     })
@@ -53,10 +51,5 @@ class MainActivity : AppCompatActivity() {
   @OnClick(R.id.a_main_button)
   fun onButtonClick() {
     startActivity(Intent(this, Main2Activity::class.java))
-  }
-
-  @OnClick(R.id.a_main_button2)
-  fun onFailApiClick() {
-    viewModel.runFailApi()
   }
 }

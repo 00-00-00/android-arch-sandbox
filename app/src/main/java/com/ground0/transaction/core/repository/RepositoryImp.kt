@@ -1,5 +1,6 @@
 package com.ground0.transaction.core.repository
 
+import android.util.Log
 import com.ground0.model.Customer
 import com.ground0.model.RetailTransaction
 import com.ground0.model.Retailer
@@ -14,10 +15,16 @@ import io.reactivex.Observable
 object RepositoryImp : Repository {
 
   override fun getTransactions(): Observable<List<RetailTransaction>> {
-    CloudStore.getTransactions().subscribe {
-      LocalStore.postTransactions(it)
-    }
     return CloudStore.getTransactions()
+        .also {
+          it.subscribe {
+            LocalStore.postTransactions(it)
+                .subscribe({ Log.d(RepositoryImp.javaClass.canonicalName, "DB write success") },
+                    {
+                      Log.d(RepositoryImp.javaClass.canonicalName, "DB write fail")
+                    })
+          }
+        }
   }
 
   override fun getTransaction(id: Long): Observable<RetailTransaction> {
