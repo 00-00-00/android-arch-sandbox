@@ -7,6 +7,7 @@ import com.ground0.model.Retailer
 import com.ground0.transaction.core.repository.db.LocalStore
 import com.ground0.transaction.core.repository.network.CloudStore
 import io.reactivex.Observable
+import kotlin.math.log
 
 /**
  * Created by 00-00-00 on 08/05/18.
@@ -17,13 +18,16 @@ object RepositoryImp : Repository {
   override fun getTransactions(): Observable<List<RetailTransaction>> {
     return CloudStore.getTransactions()
         .also {
-          it.subscribe {
+          it.subscribe({
             LocalStore.postTransactions(it)
                 .subscribe({ Log.d(RepositoryImp.javaClass.canonicalName, "DB write success") },
                     {
                       Log.d(RepositoryImp.javaClass.canonicalName, "DB write fail")
                     })
-          }
+          },
+          {
+            Log.d(RepositoryImp.javaClass.canonicalName, "Error at API Transactions")
+          })
         }
   }
 
