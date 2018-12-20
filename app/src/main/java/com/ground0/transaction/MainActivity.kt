@@ -14,7 +14,8 @@ import com.ground0.transaction.transaction.TransactionListViewModel
 
 class MainActivity : AppCompatActivity() {
 
-  private lateinit var viewModel: TransactionListViewModel
+  //inject this here
+  lateinit var viewModel: TransactionListViewModel
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -22,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     ButterKnife.bind(this)
     viewModel = ViewModelProviders.of(this)
         .get(TransactionListViewModel::class.java)
-
     showTransactions()
     subscribeToMessages()
   }

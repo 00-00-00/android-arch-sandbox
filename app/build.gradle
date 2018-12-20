@@ -37,6 +37,10 @@ android {
   }
 }
 
+kapt {
+  generateStubs = true
+}
+
 dependencies {
   implementation fileTree(include: ['*.jar'], dir: 'libs')
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
@@ -45,7 +49,7 @@ dependencies {
 
   def support_library_version = '27.1.1'
   implementation "com.android.support:appcompat-v7:$support_library_version"
-  implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+  implementation 'com.android.support.constraint:constraint-layout:1.1.3'
   implementation "com.android.support:support-core-utils:$support_library_version"
   implementation "com.android.support:design:$support_library_version"
   implementation "com.android.support:cardview-v7:$support_library_version"
@@ -56,7 +60,7 @@ dependencies {
   kapt "android.arch.lifecycle:compiler:$arch_components_version"
 
   //Room ORM
-  def room_version = '1.0.0'
+  def room_version = '1.1.1'
   implementation "android.arch.persistence.room:runtime:$room_version"
   kapt "android.arch.persistence.room:compiler:$room_version"
   implementation "android.arch.persistence.room:rxjava2:$room_version"
@@ -65,7 +69,7 @@ dependencies {
   implementation "android.arch.paging:runtime:1.0.0-rc1"
 
   //Dagger Dependency Injection
-  def dagger_version = '2.15'
+  def dagger_version = '2.16'
   implementation "com.google.dagger:dagger:$dagger_version"
   implementation "com.google.dagger:dagger-android-support:$dagger_version"
   kapt "com.google.dagger:dagger-compiler:$dagger_version"
@@ -89,7 +93,7 @@ dependencies {
   implementation 'com.jakewharton.threetenabp:threetenabp:1.1.0'
 
   //Gson
-  implementation 'com.google.code.gson:gson:2.8.3'
+  implementation 'com.google.code.gson:gson:2.8.5'
 
   testImplementation 'junit:junit:4.12'
   androidTestImplementation 'com.android.support.test:runner:1.0.2'

@@ -12,12 +12,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
  * Created by 00-00-00 on 05/05/18.
  */
 
+//set up this class to be injectable
 class TransactionListViewModel : ViewModel() {
 
-  val
-      transactions: MutableLiveData<List<RetailTransaction>> by lazy {
+  val transactions: MutableLiveData<List<RetailTransaction>> by lazy {
     loadTransactions()
-    MutableLiveData<List<RetailTransaction>>()
+      MutableLiveData<List<RetailTransaction>>()
   }
   val errorEvent = SingleLiveEvent<String>()
 

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Transaction.iml" filepath="$PROJECT_DIR$/Transaction.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-arch-sandbox.iml" filepath="$PROJECT_DIR$/android-arch-sandbox.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/model/model.iml" filepath="$PROJECT_DIR$/model/model.iml" />
     </modules>
